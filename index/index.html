@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Casa do Queijo</title>
+
+<style>
+
+:root{
+    --dourado:#f5b041;
+    --fundo-card:rgba(0,0,0,0.58);
+    --borda:rgba(245,176,65,0.2);
+    --hover:rgba(245,176,65,0.1);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    color:#fff;
+    background:
+    radial-gradient(circle at top, rgba(245,176,65,.10), transparent 35%),
+    linear-gradient(180deg, #0b0b0b 0%, #111 45%, #0b0b0b 100%);
+}
+
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:25px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:999;
+    background:rgba(0,0,0,.68);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(245,176,65,.18);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+    line-height:20px;
+    color:#fff;
+    text-decoration:none;
+    display:inline-block;
+    transition:.3s;
+}
+
+.logo:hover{
+    color:var(--dourado);
+    transform:scale(1.03);
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--dourado);
+}
+
+.btn{
+    background:var(--dourado);
+    color:#000 !important;
+    padding:10px 22px;
+    border-radius:999px;
+    text-transform:uppercase;
+    font-weight:800;
+}
+
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 20px;
+    position:relative;
+    overflow:hidden;
+    background:
+    linear-gradient(135deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 50%, rgba(0,0,0,.85) 100%),
+    url("../images/queijo.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at center, rgba(245,176,65,.16), transparent 38%),
+    linear-gradient(to bottom, transparent 70%, #111 100%);
+    pointer-events:none;
+}
+
+.content{
+    max-width:800px;
+    position:relative;
+    z-index:1;
+}
+
+.content h1{
+    font-size:52px;
+    margin-bottom:18px;
+    font-weight:900;
+}
+
+.content p{
+    font-size:24px;
+    margin-bottom:35px;
+    line-height:1.5;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn-outline{
+    background:var(--dourado);
+    color:#000;
+    padding:10px 28px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+
+.carrossel-section{
+    background:#111;
+    padding:90px 20px;
+    text-align:center;
+}
+
+.carrossel-titulo{
+    font-size:36px;
+    color:var(--dourado);
+    margin-bottom:40px;
+    font-weight:900;
+}
+
+.carrossel-wrapper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    max-width:900px;
+    margin:auto;
+}
+
+.carrossel-track-container{
+    overflow:hidden;
+    width:100%;
+    border-radius:18px;
+}
+
+.carrossel-track{
+    display:flex;
+    transition:transform .5s ease;
+}
+
+.slide{
+    min-width:100%;
+    position:relative;
+}
+
+.slide img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    display:block;
+}
+
+.slide-legenda{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,.55);
+    padding:16px;
+    color:var(--dourado);
+    font-weight:700;
+}
+
+.carrossel-btn{
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:var(--dourado);
+    color:#000;
+    font-size:28px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.carrossel-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border:none;
+    border-radius:50%;
+    background:#555;
+    cursor:pointer;
+}
+
+.dot.ativo{
+    background:var(--dourado);
+}
+
+
+section{
+    scroll-margin-top:120px;
+}
+
+
+#sobre{
+    padding:100px 8%;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:var(--fundo-card);
+    border:1px solid var(--borda);
+    border-radius:22px;
+    padding:45px;
+    backdrop-filter:blur(6px);
+}
+
+.topo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.topo h1{
+    color:var(--dourado);
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.subtitulo{
+    color:#bbb;
+}
+
+#sobre h2{
+    color:var(--dourado);
+    margin-bottom:18px;
+    margin-top:30px;
+    font-size:28px;
+}
+
+#sobre p{
+    line-height:1.8;
+    color:#ddd;
+    margin-bottom:14px;
+    background:rgba(255,255,255,.05);
+    padding:18px;
+    border-radius:14px;
+}
+
+.imagem-historia{
+    overflow:hidden;
+    border-radius:14px;
+    margin-bottom:18px;
+}
+
+.imagem-historia img {
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    display:block;
+    margin: auto;
+    border-radius:20px;
+}
+
+.foto-produtor{
+    width:100%;
+    max-width:520px;
+    margin:0 auto 18px;
+    overflow:hidden;
+    border-radius:22px;
+}
+
+.foto-produtor img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:22px;
+}
+
+#sobre ul{
+    list-style:none;
+}
+
+#sobre li{
+    background:rgba(255,255,255,.05);
+    padding:16px;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+#catalogo{
+    padding:100px 8%;
+    background:#111;
+}
+
+.catalogo-topo{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.catalogo-topo h1{
+    font-size:42px;
+    color:var(--dourado);
+    margin-bottom:10px;
+}
+
+.queijos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.queijo{
+    background:rgba(255,255,255,.05);
+    border-radius:14px;
+    overflow:hidden;
+    text-decoration:none;
+    color:#fff;
+    transition:.3s;
+    border:1px solid transparent;
+}
+
+.queijo:hover{
+    transform:translateY(-5px);
+    border-color:var(--dourado);
+}
+
+.queijo img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.texto{
+    padding:18px;
+}
+
+.texto h2{
+    color:var(--dourado);
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.texto p{
+    color:#ccc;
+    line-height:1.6;
+}
+
+/* CONTATO */
+
+#contato{
+    padding:100px 8%;
+}
+
+.contato-card{
+    max-width:1100px;
+    margin:auto;
+    background:rgba(0,0,0,.72);
+    border-radius:24px;
+    border:1px solid rgba(245,176,65,.35);
+    padding:48px;
+}
+
+.label{
+    color:var(--dourado);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+}
+
+.contato-card h2{
+    margin-top:14px;
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.descricao{
+    color:#ddd;
+    margin-bottom:35px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:22px;
+    align-items:start;
+}
+
+.info-box{
+    background:rgba(245,176,65,.08);
+    border:1px solid rgba(245,176,65,.35);
+    border-radius:18px;
+    padding:22px;
+}
+
+.mapa-box{
+    overflow:hidden;
+    border-radius:16px;
+    margin:18px 0 16px;
+    border:1px solid rgba(245,176,65,.35);
+    box-shadow:0 18px 35px rgba(0,0,0,.35);
+}
+
+.mapa-box iframe{
+    width:100%;
+    height:340px;
+    border:0;
+    display:block;
+}
+
+.endereco{
+    background:rgba(255,255,255,.06);
+    border-left:4px solid var(--dourado);
+    border-radius:14px;
+    padding:14px 16px;
+    color:#eee;
+    line-height:1.6;
+}
+
+.btn-rota{
+    display:inline-block;
+    margin-top:16px;
+    color:var(--dourado);
+    font-weight:800;
+    text-decoration:none;
+}
+
+.btn-rota:hover{
+    text-decoration:underline;
+}
+
+.btn-whatsapp{
+    display:inline-block;
+    margin-top:25px;
+    background:var(--dourado);
+    color:#111;
+    padding:14px 28px;
+    border-radius:999px;
+    font-weight:900;
+    text-decoration:none;
+}
+
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#111;
+    color:#777;
+}
+
+
+@media(max-width:900px){
+
+    header{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .content h1{
+        font-size:36px;
+    }
+
+    .content p{
+        font-size:20px;
+    }
+
+    .buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .slide img{
+        height:260px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+  .foto-produtor{
+        max-width:100%;
+        border-radius:20px;
+    }
+
+    .foto-produtor img{
+        width:100%;
+        height:auto;
+        object-fit:contain;
+        border-radius:20px;
+    }
+
+
+    .container,
+    .contato-card{
+        padding:25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <a class="logo" href="#inicio" aria-label="Voltar para o topo">
+        Casa Do<br>Queijo!
+    </a>
+
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#contato" class="btn">Contato</a>
+    </nav>
+
+</header>
+
+
+<section class="hero" id="inicio">
+
+    <div class="content">
+
+        <h1>O MELHOR QUEIJO DA REGIÃO</h1>
+
+        <p>
+            Conheça o melhor distribuidor de<br>
+            queijo do Sul de Minas
+        </p>
+
+        <div class="buttons">
+            <a href="#sobre" class="btn-outline">Sobre</a>
+            <a href="#catalogo" class="btn-outline">Catálogo</a>
+            <a href="#contato" class="btn-outline">Contato</a>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="carrossel-section">
+
+    <h2 class="carrossel-titulo">Nossos Produtos</h2>
+
+    <div class="carrossel-wrapper">
+
+        <button class="carrossel-btn prev">&#8249;</button>
+
+        <div class="carrossel-track-container">
+
+            <div class="carrossel-track">
+
+                <div class="slide">
+                    <img src="../images/fotocarrossel1.jpeg">
+                    <p class="slide-legenda">Doces e Queijos</p>
+                </div>
+
+                <div class="slide">
+                    <img src="../images/fotocarrossel2.jpeg">
+                    <p class="slide-legenda">Queijo Provolone Especial</p>
+                </div>
+
+                <div class="slide">
+                    <img src="../images/fotocarrossel3.jpeg">
+                    <p class="slide-legenda">Queijo Parmesão</p>
+                </div>
+
+                <div class="slide">
+                    <img src="../images/fotocarrossel4.jpeg">
+                    <p class="slide-legenda">Variedade de Canastras Artesanais</p>
+                </div>
+
+                <div class="slide">
+                    <img src="../images/fotocarrossel5.jpeg">
+                    <p class="slide-legenda">Queijos Temperados</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="carrossel-btn next">&#8250;</button>
+
+    </div>
+
+    <div class="carrossel-dots"></div>
+
+</section>
+
+<section id="sobre">
+
+<div class="container">
+
+    <div class="topo">
+        <h1>Casa do Queijo</h1>
+        <p class="subtitulo">
+            O melhor distribuidor de queijo do Sul de Minas
+        </p>
+    </div>
+
+    <h2>Nossa História:</h2>
+
+    <div class="imagem-historia">
+        <img src="../images/fotocarrossel4.jpeg">
+    </div>
+
+    <p>
+        A Casa do Queijo nasceu da paixão de uma família mineira pelo queijo artesanal.
+        Localizada em Coqueiral/MG, surgimos com um propósito simples:
+        levar o melhor queijo da região diretamente para sua mesa.
+    </p>
+
+    <p>
+        Com anos de experiência no mercado e parcerias sólidas com produtores locais,
+        selecionamos apenas os queijos de maior qualidade.
+    </p>
+
+    <h2>Quem está por trás:</h2>
+
+    <div class="foto-produtor">
+        <img src="../images/vanderleiSobreNos.jpeg">
+    </div>
+
+    <p>
+        Trabalhamos diariamente para entregar qualidade,
+        tradição e o verdadeiro sabor do queijo mineiro artesanal.
+    </p>
+
+    <h2>Por que nos escolher?</h2>
+
+    <ul>
+        <li>Produtos artesanais do Sul de Minas</li>
+        <li>Qualidade selecionada</li>
+        <li>Atendimento personalizado</li>
+        <li>Entrega para toda região</li>
+        <li>Grande variedade de produtos</li>
+    </ul>
+
+</div>
+
+</section>
+
+<section id="catalogo">
+
+
+
+<main>
+    <div class="topo">
+        <h1>Catálogo</h1>
+        <p>Escolha um produto e peça no WhatsApp</p>
+    </div>
+
+    <div class="queijos">
+
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no kit 4 queijos." target="_blank">
+            <img src="../images/kit4Queijo.jpeg">
+            <div class="texto">
+                <h2>Quit 4 queijos R$:35,00</h2>
+                <p>Kit com 4 tipos de queijos, perfeito para servir ou degustar.</p>
+            </div>
+        </a>
+
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Minas padrão." target="_blank">
+            <img src="../images/minasPadrao.jpeg">
+            <div class="texto">
+                <h2>Queijo Minas padrão R$:35,00</h2>
+                <p>Queijo brasileiro de sabor suave, textura macia e levemente firme, ideal para o dia a dia.</p>
+            </div>
+        </a>
+
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Kit Parmesão." target="_blank">
+            <img src="../images/kitParmesao.jpeg">
+            <div class="texto">
+                <h2>kit Parmesão R$:45,00</h2>
+                <p>Seleção de queijos parmesão de sabor marcante, textura firme e ideal para ralar ou consumir em pedaços.</p>
+            </div>
+        </a>
+
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse na Mussarela de Búfalla." target="_blank">
+            <img src="../images/fotocarrossel4.jpeg">
+            <div class="texto">
+                <h2>Mussarela de Búfala R$:35,00</h2>
+                <p>Queijo branco, macio e suculento, com sabor leve e levemente ácido, feito com leite de búfala.</p>
+            </div>
+        </a>
+
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Nozinho de Búfalla." target="_blank">
+            <img src="../images/nozinhoDeBufalla.jpeg">
+            <div class="texto">
+                <h2>Nozinho de Búfala R$:35,00</h2>
+                <p>Queijo macio e delicado, com sabor suave e levemente ácido, feito com leite de búfala, ideal para petiscos.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Nozinho Defumado." target="_blank">
+            <img src="../images/nozinhoDefumado.jpeg">
+            <div class="texto">
+                <h2>Nozinho Defumado R$:35,00</h2>
+                <p>Queijo macio com leve sabor defumado, ideal para petiscos e porções.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Nozinho de Orégano." target="_blank">
+            <img src="../images/nozinhoOregano.jpeg">
+            <div class="texto">
+                <h2>Nozinho De Orégano R$:35,00</h2>
+                <p>Queijo macio com leve sabor de orégano, ideal para petiscos e porções.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Nozinho Padrão." target="_blank">
+            <img src="../images/nozinhoPadrao.jpeg">
+            <div class="texto">
+                <h2>Nozinho Padrão R$:35,00</h2>
+                <p>Queijo macio e suave, ideal para petiscos e porções.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Palito De Orégano." target="_blank">
+            <img src="../images/palitoOregano.jpeg">
+            <div class="texto">
+                <h2>Palito De Orégano R$:35,00</h2>
+                <p>Queijo em formato de palito, macio e com leve sabor de orégano, ideal para petiscos.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Palito Padrão." target="_blank">
+            <img src="../images/palitoPadrao.jpeg">
+            <div class="texto">
+                <h2>Palito Padrão R$:35,00</h2>
+                <p>Queijo em formato de palito, macio e de sabor suave, ideal para petiscos.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Parmesão Capa Preta." target="_blank">
+            <img src="../images/parmesaoCapaPreta.jpeg">
+            <div class="texto">
+                <h2>Queijo Parmesão Capa Preta R$:38,00</h2>
+                <p>Queijo de sabor intenso, textura firme e maturação mais longa, ideal para ralar ou consumir em pedaços.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Prolone De Alho Defumado." target="_blank">
+            <img src="../images/provoloneAlhoDefumado.jpeg">
+            <div class="texto">
+                <h2>Queijo Provolone De Alho Defumado R$:35,00</h2>
+                <p>Queijo firme com sabor marcante de alho e leve toque defumado, ideal para petiscos e porções.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Provolone Ao Vinho." target="_blank">
+            <img src="../images/provoloneAoVinho.jpeg">
+            <div class="texto">
+                <h2>Queijo Provolone Ao Vinho R$:35,00</h2>
+                <p>Queijo firme com sabor marcante e leve toque de vinho, ideal para petiscos e porções.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Provolone Defumado padrão." target="_blank">
+            <img src="../images/provoloneDefumadoPadrao.jpeg">
+            <div class="texto">
+                <h2>Queijo Provolone Defumado Padrão R$:35,00</h2>
+                <p>Queijo firme com sabor defumado suave, ideal para petiscos e porções.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Provolone Desidratado." target="_blank">
+            <img src="../images/provoloneDesidratado.jpeg">
+            <div class="texto">
+                <h2>Queijo Provolone Desidratado R$:35,00</h2>
+                <p>Queijo crocante e de sabor intenso, ideal para petiscos.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Provolone Desidratado Com Ervas." target="_blank">
+            <img src="../images/provoloneDesidratadoErvas.jpeg">
+            <div class="texto">
+                <h2>Queijo Provolone Desidratado Com Ervas R$:35,00</h2>
+                <p>Queijo crocante com sabor intenso e toque de ervas, ideal para petiscos.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Meia Canastra." target="_blank">
+            <img src="../images/queijoMeiaCanastra.jpeg">
+            <div class="texto">
+                <h2>Queijo Meia Canastra R$: 35,00</h2>
+                <p>Queijo mineiro macio, de sabor suave e levemente salgado, ótimo para comer no café ou com pão.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Meia Cura." target="_blank">
+            <img src="../images/queijoMeiaCura.jpeg">
+            <div class="texto">
+                <h2>Queijo Meia Cura R$:60,00</h2>
+                <p>Queijo mineiro com sabor mais marcante, textura firme e levemente salgado. Ideal para comer puro, com pão ou derreter em receitas.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Queijo Minas." target="_blank">
+            <img src="../images/queijoMinas.jpeg">
+            <div class="texto">
+                <h2>Queijo Minas R$:35,00</h2>
+                <p>Queijo leve, branco e de sabor suave, muito consumido no dia a dia. Vai bem no café da manhã, com pão ou puro.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Mussarela." target="_blank">
+            <img src="../images/queijoMussarella.jpeg">
+            <div class="texto">
+                <h2>Queijo Mussarela R$:35,00</h2>
+                <p>Queijo macio, de sabor suave e que derrete fácil. Muito usado em pizzas, sanduíches e lanches.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo prato." target="_blank">
+            <img src="../images/queijoPrato.jpeg">
+            <div class="texto">
+                <h2>Queijo Prato R$:35,00</h2>
+                <p>Queijo macio, de sabor suave e levemente amanteigado. Muito usado em sanduíches, lanches e para derreter.</p>
+            </div>
+        </a>
+         <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Reino." target="_blank">
+            <img src="../images/queijoReno.jpeg">
+            <div class="texto">
+                <h2>Queijo Reino R$:35,00</h2>
+                <p>Queijo de sabor mais forte e levemente salgado, com textura firme e aroma marcante. Muito usado em tábuas de frios e receitas.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Roquefort." target="_blank">
+            <img src="../images/queijoRoquefort.jpeg">
+            <div class="texto">
+                <h2>Queijo Roquefort R$:35,00</h2>
+                <p>Queijo azul de sabor forte e marcante, com veias esverdeadas e textura cremosa. Inspirado no roquefort tradicional, é feito em Minas Gerais e muito usado em saladas, molhos e tábuas de frios.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Tilst." target="_blank">
+            <img src="../images/queijoTilst.jpeg">
+            <div class="texto">
+                <h2>Queijo Tilst R$:35,00</h2>
+                <p>Queijo de sabor suave a levemente forte, com textura macia e algumas olhaduras. Muito usado em sanduíches, tábuas de frios e para comer puro.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Trança Temperado." target="_blank">
+            <img src="../images/queijoTrancaTemperado.jpeg">
+            <div class="texto">
+                <h2>Queijo Trança Temperado R$:35,00</h2>
+                <p>Queijo de textura macia, feito em formato trançado e com ervas ou temperos na massa. Tem sabor suave e é ótimo para petiscos e lanches.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Trança de vinho." target="_blank">
+            <img src="../images/">
+            <div class="texto">
+                <h2>Queijo Trança de Vinho R$:35,00</h2>
+                <p>Queijo de textura macia, feito em formato trançado e com ervas ou temperos na massa e com um leve toque de vinho. Tem sabor suave e é ótimo para petiscos e lanches.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Trança Com Tomate." target="_blank">
+            <img src="../images/queijoTrancaTomate.jpeg">
+            <div class="texto">
+                <h2>Queijo Trança Com Tomate R$:35,00</h2>
+                <p>Queijo trança com tomate é um queijo macio em formato trançado, com pedaços ou sabor de tomate. Tem gosto suave e levemente temperado, ideal para petiscos e lanches.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Ricota Padrão." target="_blank">
+            <img src="../images/ricotaPadrao.jpeg">
+            <div class="texto">
+                <h2>Queijo Ricota Padrão R$:20,00</h2>
+                <p>Queijo leve, branco e de sabor suave. Tem textura macia e é muito usado em dietas, recheios e receitas leves.</p>
+            </div>
+        </a>
+        <a class="queijo" href="https://wa.me/5535988091127?text=Olá! Tenho interesse no Queijo Ricota Temperada." target="_blank">
+            <img src="../images/ricotaTemperada.jpeg">
+            <div class="texto">
+                <h2>Queijo Ricota Temperada R$:20,00</h2>
+                <p>Queijo leve e macio, com ervas e temperos misturados. Tem sabor suave e é muito usada em pães, torradas e receitas.</p>
+            </div>
+        </a>
+
+    </div>
+</main>
+
+</section>
+
+
+<section id="contato">
+
+<div class="contato-card">
+
+    <p class="label">Contato</p>
+
+    <h2>MELHOR QUEIJO DIRETO NA SUA CASA</h2>
+
+    <p class="descricao">
+        Entre em contato agora!
+    </p>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+
+            <p class="label">Contato</p>
+
+            <a href="https://wa.me/35988091127"
+               target="_blank"
+               class="btn-whatsapp">
+
+               WhatsApp
+
+            </a>
+
+            <br><br>
+
+            <p class="label">E-mail</p>
+            <p>casadoqueijocoq@gmail.com</p>
+
+        </div>
+
+        <div class="info-box">
+
+            <p class="label">Endereço</p>
+
+            <div class="mapa-box">
+                <iframe
+                title="Mapa da Casa do Queijo em Coqueiral/MG"
+                src="https://www.google.com/maps?q=Rua%20Arcos%2C%20107%2C%20Coqueiral%20-%20MG&z=17&output=embed"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <p class="endereco">Rua Arcos, Nº 107 — Coqueiral/MG</p>
+
+            <a class="btn-rota"
+               href="https://www.google.com/maps/search/?api=1&query=Rua%20Arcos%2C%20107%2C%20Coqueiral%20-%20MG"
+               target="_blank">
+               Ver rota no Google Maps
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<footer>
+    © 2025 Casa do Queijo — Coqueiral/MG
+</footer>
+
+<script>
+
+const track = document.querySelector('.carrossel-track');
+const slides = document.querySelectorAll('.slide');
+const btnPrev = document.querySelector('.carrossel-btn.prev');
+const btnNext = document.querySelector('.carrossel-btn.next');
+const dotsContainer = document.querySelector('.carrossel-dots');
+
+let indiceAtual = 0;
+const total = slides.length;
+
+slides.forEach((_, i) => {
+
+    const dot = document.createElement('button');
+
+    dot.classList.add('dot');
+
+    if(i === 0) dot.classList.add('ativo');
+
+    dot.addEventListener('click', () => irPara(i));
+
+    dotsContainer.appendChild(dot);
+
+});
+
+const dots = document.querySelectorAll('.dot');
+
+function irPara(indice){
+
+    indiceAtual = (indice + total) % total;
+
+    track.style.transform =
+    `translateX(-${indiceAtual * 100}%)`;
+
+    dots.forEach(d => d.classList.remove('ativo'));
+
+    dots[indiceAtual].classList.add('ativo');
+
+}
+
+btnNext.addEventListener('click', () => irPara(indiceAtual + 1));
+
+btnPrev.addEventListener('click', () => irPara(indiceAtual - 1));
+
+setInterval(() => irPara(indiceAtual + 1), 4000);
+
+</script>
+
+</body>
+</html>
